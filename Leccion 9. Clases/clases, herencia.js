@@ -1,10 +1,19 @@
-class Persona {
+class Usuario {
+
+
+    static contadorPersonas = 0;
 
     constructor(nombre, apellido, edad) {
 
+        this.idPersona = ++Usuario.contadorPersonas;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
+
+    }
+
+    get getIdPersona() {
+        return this.idPersona;
     }
 
     get getNombre() {
@@ -39,22 +48,28 @@ class Persona {
         this.edad = edad;
     }
 
-    nombreCompleto() {
-        return this.nombre + ' ' + this.apellido;
+    toString() {
+        return "Persona " + this.idPersona + "{" +
+            "nombre= '" + this.nombre + '\'' +
+            ", apellido= '" + this.apellido + '\'' +
+            ", edad= '" + this.edad + '\'' +
+            '}';
     }
 
-    toString(){
-        return this.nombreCompleto() + ', ' + this.edad;
-    }
+    //static numero = 5; //variable estatica
+    //hola = 'ola';//variable no estatica
 
 }
 
 
-class Empleado extends Persona {
+class Empleado extends Usuario {
 
-    constructor(nombre, apellido, edad, departamento) {
-        super(nombre, apellido, edad);//clase padre hereda el elemento nombre y apellido
+    static contadorPersonas = 0;
+
+    constructor(idPersona, nombre, apellido, edad, departamento) {
+        super(idPersona, nombre, apellido, edad);//clase padre hereda el elemento nombre y apellido
         this.departamento = departamento;
+        this.idPersona = ++Empleado.contadorPersonas;
     }
 
     get getDepartamento() {
@@ -68,34 +83,39 @@ class Empleado extends Persona {
     }
 
     //sobreescritura
-    nombreCompleto() {
-        return super.nombreCompleto() + ', ' + this.departamento
-
+    toString() {
+        return "Empleado " + this.idPersona + "{" +
+            "nombre= '" + this.nombre + '\'' +
+            ", apellido= '" + this.apellido + '\'' +
+            ", edad= '" + this.edad  + '\'' +
+            ", departamento= '" + this.departamento + '\'' +
+            '}';
     }
 
 
 }
 
-let persona = new Persona('Jose', 'Hernandez', 43);
-
-for (const i in persona) {
-    if (Object.hasOwnProperty.call(persona, i)) {
-        const element = persona[i];
-        console.log(element);
-
-    }
-}
+let persona = new Usuario('Jose', 'Hernandez', 43);
 
 console.log(persona.toString());
+
+let persona1 = new Usuario('Juan', 'Gomez', 23);
+
+console.log(persona1.toString());
 
 
 let empleado = new Empleado('Maria', 'Gomez', 19, 'Mantenimiento');
 
-for (const i in empleado) {
-    if (Object.hasOwnProperty.call(empleado, i)) {
-        const element = empleado[i];
-        console.log(element);
-    }
-}
-
 console.log(empleado.toString());
+
+let empleado1 = new Empleado('Andrea', 'salazar', 39, 'Planta');
+
+console.log(empleado1.toString());
+
+
+/*Para llamar a una variable o metodo estatico hay que poner
+primero el nombre de la clase, ya que si ponemos el nombre del objeto
+este lo tomara como indefinido*/
+//console.log(Persona.numero);
+
+//console.log(persona.hola);
