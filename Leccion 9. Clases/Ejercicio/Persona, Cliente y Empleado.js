@@ -3,12 +3,22 @@ class Persona {
 
     static contadorPersona = 0;
 
+    static get MAX_PERSONAS() {
+        return 5;
+    }
+
     constructor(nombre, apellido, edad) {
 
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.idPersona = ++Persona.contadorPersona;
+        if (Persona.contadorPersona < Persona.MAX_PERSONAS) {
+
+            this.idPersona = ++Persona.contadorPersona;
+        }else{
+            
+            console.log("Limite de personas alcanzado");
+        }
 
     }
 
@@ -128,40 +138,35 @@ class Cliente extends Persona {
     //personas
     let persona1 = new Persona("Jose", "Alvarez", 43);
 
-    console.log(persona1.toString());
-
     let persona2 = new Persona("Juan", "Gomez", 33);
-
-    console.log(persona2.toString());
 
     let persona3 = new Persona("Andrea", "Perez", 23);
 
-    console.log(persona3.toString());
+    let persona4 = new Persona("Mateo", "Heredia", 43);
+
+    let persona5 = new Persona("Natalia", "Leal", 18);
+
+    let persona6 = new Persona("Alejandro", "Baez", 23);
+
+    console.log(persona6.toString());
+
 
     //empleados
     let empleado1 = new Empleado("Myriam", "Luengo", 21, 2300);
 
-    console.log(empleado1.toString());
-
     let empleado2 = new Empleado("Markel", "Reina", 49, 30000);
-
-    console.log(empleado2.toString());
 
     let empleado3 = new Empleado("Vicent", "Herranz", 31, 4000);
 
-    console.log(empleado3.toString());
+    //console.log(empleado3.toString());
 
     //clientes
     let cliente1 = new Cliente("Ariadna", "Acuña", 43, new Date());
 
-    console.log(cliente1.toString());
-
     let cliente2 = new Cliente("Ibon", "Costas", 19, new Date('August 19, 2015 23:15:30'));
-
-    console.log(cliente2.toString());
 
     let cliente3 = new Cliente("Paul", "Hinojosa", 20, new Date('September 21, 2018 12:15:00'));
 
-    console.log(cliente3.toString());
+    //console.log(cliente3.toString());
 
 })();
